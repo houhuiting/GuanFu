@@ -1,1 +1,3 @@
-To be done.
+# Server
+
+Pleaese enter `./attester` for server.
