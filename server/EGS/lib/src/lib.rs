@@ -1,14 +1,13 @@
 use anyhow::{anyhow, Result};
-use eventlog_rs::fetch_hashes;
 use librats_rs::{get_quote, verify_quote};
-use serde::Serialize;
+use serde::{Serialize, Deserialize};
 
 use std::fs;
 
 const EVENTLOG_INFO_PATH: &str = "/sys/firmware/acpi/tables/TDEL";
 const EVENTLOG_DATA_PATH: &str = "/sys/firmware/acpi/tables/data/TDEL";
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 pub struct AttestationEv {
     pub quote: Vec<u8>,
     pub eventlog_info: Vec<u8>,
