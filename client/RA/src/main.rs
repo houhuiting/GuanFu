@@ -19,6 +19,8 @@ pub mod attestation {
 
 mod verifier;
 
+const ARTIFACT_NAME: &str = "";
+
 #[derive(Parser, Debug)]
 #[clap(author, version, about, long_about = None)]
 struct Args {
@@ -52,7 +54,7 @@ async fn real_main() -> Result<()> {
 
     // get reference values
     let mut rv_client = QueryReferenceValueClient::connect(rvps_addr).await?;
-    let name = String::new();
+    let name = String::from(ARTIFACT_NAME);
     let query = QueryReq { name };
     let rv = match rv_client.query(query).await?.into_inner().reference_value {
         None => return Err(anyhow!("No reference value find.")),
