@@ -1,5 +1,6 @@
 use anyhow::{anyhow, Result};
-use librats_rs::{get_quote, verify_quote};
+use eventlog_rs::Eventlog;
+use librats_rs::{TeeType, get_quote, verify_quote};
 use serde::{Serialize, Deserialize};
 
 use std::fs;
@@ -35,4 +36,21 @@ pub async fn get_evidence(report_data: Vec<u8>) -> Result<AttestationEv> {
         eventlog_info,
         eventlog_data,
     })
+}
+
+pub async fn verify_evidence(
+    tee: &str,
+    evidence: AttestationEv,
+    report_data: &[u8],
+) -> Result<Eventlog> {
+    if tee != "tdx" {
+        return Err(anyhow!("Unsupported TEE type"));
+    }
+
+    let _parsed_claims = verify_quote(&evidence.quote, report_data, TeeType::TDX).await?;
+
+    let event_log = Eventlog::try_from(evidence.eventlog_data.clone())?;
+    // TODO: Verify the integrity of eventlog.
+
+    Ok(event_log)
 }
