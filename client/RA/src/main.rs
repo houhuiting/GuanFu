@@ -2,7 +2,7 @@
 
 use anyhow::*;
 use attestation::remote_attestation_client::RemoteAttestationClient;
-use attestation::TcbStatusReq;
+use attestation::RemoteAttestationReq;
 use clap::Parser;
 use log::{error, info};
 use query::query_reference_value_client::QueryReferenceValueClient;
@@ -40,8 +40,12 @@ async fn real_main() -> Result<()> {
 
     // get evidences
     let mut as_client = RemoteAttestationClient::connect(as_addr).await?;
-    let query = TcbStatusReq {};
-    let evi = as_client.get_tcb_status(query).await?.into_inner().status;
+    let query = RemoteAttestationReq {};
+    let evi = as_client
+        .get_attestation_evidence(query)
+        .await?
+        .into_inner()
+        .status;
 
     let evi = serde_json::from_str(&evi)?;
     let event_log = verifier::verify_evidence(verifier::TEE, evi, verifier::REPORT_DATA).await?;
@@ -50,11 +54,12 @@ async fn real_main() -> Result<()> {
     let mut rv_client = QueryReferenceValueClient::connect(rvps_addr).await?;
     let name = String::new();
     let query = QueryReq { name };
-    let _rv = match rv_client.query(query).await?.into_inner().reference_value {
+    let rv = match rv_client.query(query).await?.into_inner().reference_value {
         None => return Err(anyhow!("No reference value find.")),
         Some(r) => serde_json::from_str::<ReferenceValue>(&r)?,
     };
 
+    verifier::verify(event_log, rv)?;
     // compare
 
     Ok(())

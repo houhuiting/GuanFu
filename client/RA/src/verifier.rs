@@ -1,6 +1,8 @@
 //! verifier
 
-use anyhow::Result;
+use anyhow::{anyhow, Result};
+use eventlog_rs::Eventlog;
+use lib::AttestationEv;
 use reference_value_provider_service::ReferenceValue;
 
 pub const REPORT_DATA: &[u8] = b"";
@@ -11,7 +13,7 @@ pub async fn verify_evidence(
     evidence: AttestationEv,
     report_data: &[u8],
 ) -> Result<Eventlog> {
-    anyhow!("No event log got")
+    Err(anyhow!("No event log got"))
 }
 
 pub fn verify(event_log: Eventlog, rv: ReferenceValue) -> Result<()> {

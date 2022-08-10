@@ -13,9 +13,9 @@ serde_json = "1.0.81"
 anyhow = "1.0.59"
 prost = "0.8.0"
 log = "0.4.17"
-reference-value-provider-service = {git = "https://github.com/Xynnn007/reference-value-provider-service", rev = "5ea056f68142cfd7e1d97418cf9551e213f0274a" }
-eventlog-rs = {git = "https://github.com/inclavare-containers/eventlog-rs", rev = "80f86c39013453fbea06000e607c4dfa118a4ff0"}
-lib = {git = "https://github.com/jialez0/librats-rs-sample"}
+reference-value-provider-service = { path = "../RVP/lib" }
+eventlog-rs = {git = "https://github.com/inclavare-containers/eventlog-rs"}
+lib = {path = "../../server/EGS/lib"}
 
 [build-dependencies]
 tonic-build = "0.5"
