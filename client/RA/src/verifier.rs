@@ -5,6 +5,9 @@ use eventlog_rs::Eventlog;
 use lib::AttestationEv;
 use reference_value_provider_service::ReferenceValue;
 
+use std::fmt::Write;
+use std::collections::HashSet;
+
 pub const REPORT_DATA: &[u8] = b"";
 pub const TEE: &str = "tdx";
 
@@ -13,9 +16,33 @@ pub async fn verify_evidence(
     evidence: AttestationEv,
     report_data: &[u8],
 ) -> Result<Eventlog> {
-    Err(anyhow!("No event log got"))
+    lib::verify_evidence(tee, evidence, report_data).await
 }
 
 pub fn verify(event_log: Eventlog, rv: ReferenceValue) -> Result<()> {
-    Ok(())
+    let mut verified_digests = HashSet::new();
+
+    for hv in rv.hash_values() {
+        verified_digests.insert(hv.value().to_owned());
+    }
+
+    let unverified_digests: Vec<String> = event_log.log
+        .iter()
+        .flat_map(|entry| &entry.digests)
+        .map(|digest| {
+            let mut dig_str = String::with_capacity(2 * digest.digest.len());
+            for byte in &digest.digest {
+                write!(dig_str, "{:02x}", byte).unwrap();
+            }
+            dig_str
+        })
+        .collect();
+    
+    for unv_dig in &unverified_digests {
+        if verified_digests.contains(unv_dig) {
+            return Ok(())
+        }
+    }
+    
+    Err(anyhow!("Digest match failed!"))
 }
