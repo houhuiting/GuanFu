@@ -59,5 +59,5 @@ COPY --from=0 /code/*.deb /root/
 COPY --from=0 /code/json/share /home/rebuild
 RUN dpkg --install /root/*.deb
 WORKDIR /usr/share/dettrace/examples
-
+#ADD config /root/.cargo/
 RUN echo 'export PS1="\w \[\033[1;36m\]$ \[\033[0m\]"' >> /root/.bashrc

@@ -93,16 +93,24 @@ impl Extractor for GuanFuExtractor {
         provenance_file.write(provenance.as_bytes()).unwrap();
 
         //  run bash script
-        let output = Command::new("bash")
-            .arg("./guanfu-rs/build.sh")
+        // let output = Command::new("bash")
+        //     .arg("./guanfu-rs/build.sh")
+        //     .output()
+        //     .expect("Execution error, please re-check if the startup file exists");
+        // let _result = output.status;
+        // println!("{:?}", _result);
+
+
+
+        let output2 = Command::new("bash")
+            .arg("./guanfu-rs/build2.sh")
             .output()
             .expect("Execution error, please re-check if the startup file exists");
-        let _result = output.status;
+        let _result = output2.status;
         println!("{:?}", _result);
-
         // read result from the new json file
         let mut readfile = std::fs::File::open("./guanfu-rs/mount/new.guanfu")
-            .expect("请确定重复构建是否执行完成");
+            .expect("Please make sure that the reproducible build is completed");
         let mut contents = String::new();
         readfile.read_to_string(&mut contents).unwrap();
         let unserialized: Provenance = serde_json::from_str(&contents).unwrap();
@@ -131,9 +139,9 @@ pub mod test {
 
     pub fn generate_guanfu_provenance() -> String {
         let che = Checksum {
-            md5: "94114cfeea5deca136ebcb7263805e2e".to_string(),
-            sha1: "d0c1db4ec2de38a2cd908a73dac7c87ded8b9ff9".to_string(),
-            sha256: "9ca442bb48a1b6ed4409a18e95e519e48b1da7da34a9319271d959cabdb06706".to_string(),
+            md5: "92841e159ff2de31e1664817606b07a5".to_string(),
+            sha1: "8e0996c18445f2b082cd901db4da00569f5273df".to_string(),
+            sha256: "0d3ba3a7eaacb75e70904707a6be80b29cf344cf8f116a17b4ea938c95d2a703".to_string(),
         };
         let bin = Binary {
             checksum: che,
@@ -161,7 +169,7 @@ pub mod test {
         };
         let dep3 = Dependency {
             source_dep: "git".to_string(),
-            version_dep: "1:2.17.1-1ubuntu0.12".to_string(),
+            version_dep: "1:2.17.1-1ubuntu0.13".to_string(),
         };
         let dep4 = Dependency {
             source_dep: "curl".to_string(),
