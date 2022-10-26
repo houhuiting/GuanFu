@@ -1,14 +1,15 @@
 #include "seccomp.hpp"
-#include "util.hpp"
-
-#include <iostream>
-#include <stdexcept>
-#include <string>
 
 #include <sys/personality.h>
 #include <sys/ptrace.h>
 #include <sys/reg.h> /* For constants ORIG_EAX, etc */
 #include <sys/syscall.h> /* For SYS_write, etc */
+
+#include <iostream>
+#include <stdexcept>
+#include <string>
+
+#include "util.hpp"
 
 using namespace std;
 
@@ -308,13 +309,12 @@ void seccomp::loadRules(bool debug, bool convertUids) {
   // noIntercept(SYS_shmdt);
   // noIntercept(SYS_shmctl);
 
- //if unreproducible modify these intercept ;
-  noIntercept(SYS_statx);
-  //intercept(SYS_statx);
+  // if unreproducible modify these intercept ;
+  intercept(SYS_statx);
+  // intercept(SYS_statx);
   noIntercept(SYS_kill);
   noIntercept(SYS_copy_file_range);
   noIntercept(SYS_restart_syscall);
-
 }
 
 void seccomp::noIntercept(uint16_t systemCall) {

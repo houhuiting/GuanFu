@@ -1,15 +1,19 @@
 #ifndef DETTRACE_SYSTEM_CALL_H
 #define DETTRACE_SYSTEM_CALL_H
 
+#include <fcntl.h>
+#include <linux/stat.h>
+#include <signal.h>
+#include <sys/stat.h>
+#include <sys/syscall.h> /* For SYS_xxx definitions */
+#include <sys/types.h>
+#include <unistd.h>
+
 #include "globalState.hpp"
 #include "scheduler.hpp"
 #include "state.hpp"
 #include "util.hpp"
 #include "utilSystemCalls.hpp"
-
-#include <signal.h>
-#include <sys/syscall.h> /* For SYS_xxx definitions */
-
 using namespace std;
 
 #define ARCH_GET_CPUID 0x1011
@@ -2214,4 +2218,28 @@ void handleDents(globalState& gs, state& s, ptracer& t, scheduler& sched) {
   return;
 }
 // =======================================================================================
+/**
+
+ * int statx(int dirfd, const char *pathname, int flags, unsigned int mask,
+ struct statx *statxbuf);
+
+ * The statx() system call operates in exactly the same way as stat(), except
+ * for if the pathname given in pathname is relative, then it is interpreted
+ * relative to the directory referred to by the file descriptor dirfd (rather
+ * than relative to the  cur‐ rent  working  directory  of the calling process,
+ * as is done by stat() for a relative pathname).
+ *x
+ * Actual name of underlying system call is newfstatat.
+ */
+class statxSystemCall {
+public:
+  static bool handleDetPre(
+      globalState& gs, state& s, ptracer& t, scheduler& sched);
+  static void handleDetPost(
+      globalState& gs, state& s, ptracer& t, scheduler& sched);
+
+  const int syscallNumber = SYS_statx;
+  const string syscallName = "statx";
+};
+
 #endif

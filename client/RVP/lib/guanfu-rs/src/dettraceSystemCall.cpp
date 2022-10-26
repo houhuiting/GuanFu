@@ -1,43 +1,40 @@
+#include "dettraceSystemCall.hpp"
+
 #include <arpa/inet.h>
 #include <asm/prctl.h>
 #include <errno.h>
 #include <fcntl.h> /* Obtain O_* constant definitions */
 #include <inttypes.h>
+#include <linux/fiemap.h>
+#include <linux/fs.h>
+#include <linux/futex.h>
+#include <linux/rtc.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/epoll.h>
 #include <sys/ioctl.h>
 #include <sys/mman.h>
 #include <sys/prctl.h>
+#include <sys/resource.h>
 #include <sys/select.h>
 #include <sys/socket.h>
 #include <sys/stat.h>
 #include <sys/syscall.h>
+#include <sys/sysinfo.h>
+#include <sys/time.h>
 #include <sys/timerfd.h>
 #include <sys/times.h>
 #include <sys/types.h>
+#include <sys/uio.h>
 #include <sys/utsname.h>
 #include <unistd.h>
+#include <utime.h>
 
 #include <cstring>
 #include <limits>
 #include <optional>
-
-#include <linux/fiemap.h>
-#include <linux/fs.h>
-#include <linux/futex.h>
-#include <linux/rtc.h>
-#include <sys/resource.h>
-#include <sys/sysinfo.h>
-#include <sys/time.h>
-#include <sys/types.h>
-#include <sys/uio.h>
-#include <utime.h>
 #include <unordered_map>
 
-#include <optional>
-
-#include "dettraceSystemCall.hpp"
 #include "execution.hpp"
 #include "ptracer.hpp"
 #include "utilSystemCalls.hpp"
@@ -99,7 +96,7 @@ void arch_prctlSystemCall::handleDetPost(
   if (0 != t.getReturnValue()) {
     string errmsg("cpuid interception (cpuid_fault) via arch_prctl failed: ");
     errmsg += strerror(-t.getReturnValue());
-    errmsg += "\nPlease check `cpuid_fault` flag from `cat /proc/cpuinfo`";
+    errmsg += "\nPlease check `cpuid_fault` flag from `cat /proc/cpuinfo\n`";
     gs.log.writeToLog(Importance::inter, errmsg);
     gs.allow_trapCPUID = false;
   } else {
@@ -3383,3 +3380,19 @@ void shutdownSystemCall::handleDetPost(
 
   return;
 }
+// =======================================================================================
+// add statx system call in 22.10.19
+
+bool statxSystemCall::handleDetPre(
+    globalState& gs, state& s, ptracer& t, scheduler& sched) {
+  gs.log.writeToLog(Importance::info, "statx(fd=%d)\n", t.arg1());
+  return true;
+}
+
+void statxSystemCall::handleDetPost(
+    globalState& gs, state& s, ptracer& t, scheduler& sched) {
+  handleStatFamily(gs, s, t, "statx");
+
+  return;
+}
+// =======================================================================================

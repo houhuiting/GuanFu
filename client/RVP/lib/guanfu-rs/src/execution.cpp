@@ -1,4 +1,10 @@
 #include "execution.hpp"
+
+#include <sys/utsname.h>
+
+#include <stack>
+#include <tuple>
+
 #include "dettrace.hpp"
 #include "dettraceSystemCall.hpp"
 #include "logger.hpp"
@@ -9,10 +15,6 @@
 #include "systemCallList.hpp"
 #include "util.hpp"
 #include "vdso.hpp"
-
-#include <sys/utsname.h>
-#include <stack>
-#include <tuple>
 
 #define MAKE_KERNEL_VERSION(x, y, z) ((x) << 16 | (y) << 8 | (z))
 
@@ -999,6 +1001,8 @@ bool execution::callPreHook(
     ptracer& t,
     scheduler& sched) {
   switch (syscallNumber) {
+  case SYS_statx:
+    return statxSystemCall::handleDetPre(gs, s, t, sched);
   case SYS_access:
     return accessSystemCall::handleDetPre(gs, s, t, sched);
 
@@ -1343,6 +1347,8 @@ void execution::callPostHook(
     ptracer& t,
     scheduler& sched) {
   switch (syscallNumber) {
+  case SYS_statx:
+    return statxSystemCall::handleDetPost(gs, s, t, sched);
   case SYS_access:
     return accessSystemCall::handleDetPost(gs, s, t, sched);
 

@@ -1,10 +1,11 @@
 #include "utilSystemCalls.hpp"
 
 #include <fcntl.h>
+
+#include <chrono>
 #include <sstream>
 
 #include "util.hpp"
-
 // File local functions.
 
 bool preemptIfBlocked(
@@ -82,6 +83,52 @@ void zeroOutStatfs(struct statfs& stats) {
 // =======================================================================================
 void handleStatFamily(
     globalState& gs, state& s, ptracer& t, string syscallName) {
+  if (syscallName == "statx") {
+    // author:Yishang.Zhang@linux.alibaba.com
+    // add in 2022.20.23
+    struct statx* statxPtr;
+    statxPtr = (struct statx*)t.arg5();
+    if (nullptr == statxPtr) {
+      gs.log.writeToLog(Importance::info, syscallName + ": statxbuf null.\n");
+      return;
+    }
+    int retVal = t.getReturnValue();
+    if (0 == retVal) {
+      struct statx theirStatx =
+          t.readFromTracee(traceePtr<struct statx>(statxPtr), s.traceePid);
+      struct statx myStatx;
+      memset(&myStatx, 0, sizeof(myStatx));
+      myStatx.stx_uid = theirStatx.stx_uid;
+      myStatx.stx_gid = theirStatx.stx_gid;
+      myStatx.stx_mode = theirStatx.stx_mode;
+      myStatx.stx_size = theirStatx.stx_size;
+      /*According to the author's original idea about the st_size of stat, if it
+       * is a directory, it should be set to a fixed value.*/
+      myStatx.stx_mask = theirStatx.stx_mask;
+      myStatx.stx_attributes = theirStatx.stx_attributes;
+      myStatx.stx_attributes_mask = theirStatx.stx_attributes_mask;
+      myStatx.stx_rdev_major = theirStatx.stx_rdev_major;
+      myStatx.stx_rdev_minor = theirStatx.stx_rdev_minor;
+      myStatx.stx_blocks = 1;
+      myStatx.stx_blksize = 512;
+      myStatx.stx_dev_major = 1;
+      myStatx.stx_dev_minor = 1;
+      // timestamp
+      // myStatx.stx_atime =
+      time_point_to_statx_timestamp(gs, myStatx.stx_atime);
+      time_point_to_statx_timestamp(gs, myStatx.stx_btime);
+      time_point_to_statx_timestamp(gs, myStatx.stx_ctime);
+      time_point_to_statx_timestamp(gs, myStatx.stx_mtime);
+      ino_t realinode = theirStatx.stx_ino;
+      myStatx.stx_ino = gs.inodeMap.realValueExists(realinode)
+                            ? gs.inodeMap.getVirtualValue(realinode)
+                            : gs.inodeMap.addRealValue(realinode);
+
+      t.writeToTracee(traceePtr<struct statx>(statxPtr), myStatx, s.traceePid);
+    }
+
+    return;
+  }
   struct stat* statPtr;
 
   if (syscallName == "newfstatat") {
@@ -622,4 +669,21 @@ void handlePostOpens(globalState& gs, state& s, ptracer& t, int flags) {
   gs.log.writeToLog(
       Importance::info, "File descriptor: %d\n", t.getReturnValue());
 }
+// =======================================================================================
+/*
+ * @author:yishang.zhang@linux.alibaba.com
+ * @describe change a date of time_point style to statx_timestamp
+ */
+bool time_point_to_statx_timestamp(
+    globalState& gs, struct statx_timestamp& ts) {
+  // ts.tv_sec = std::chrono::system_clock::to_time_t(gs.epoch);
+  ts.tv_sec = std::chrono::duration_cast<std::chrono::seconds>(
+                  gs.epoch.time_since_epoch())
+                  .count();
+  ts.tv_nsec = 0; // Temporarily set to 0 because setting the epoch in
+                  // milliseconds is not supported in guanfu
+  // fprintf(stdout, "time is ll : %ld \n", dur);
+  return true;
+}
+
 // =======================================================================================

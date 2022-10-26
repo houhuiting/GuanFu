@@ -1,26 +1,27 @@
 {
    "binary" : {
       "checksum" : {
-         "md5" : "",
+         "md5" : " ",//若空 应该有空格字符 不然无法解析
          "sha1" : "",
          "sha256" : ""
       },
-      "url" : "/kata-containers/src/agent/target/x86_64-unknown-linux-musl/release/kata-agent"
+      "url" : "/kata-containers/src/agent/target/x86_64-unknown-linux-musl/release/kata-agent"   //采用相对路径 具体至产物名称 否则无法找到生成的二进制文件 
    },
    "command" : [
       "rustup target add x86_64-unknown-linux-musl",
-      "git clone https://github.com/kata-containers/kata-containers.git",
+      "git clone https://github.com/kata-containers/kata-containers.git", //为保证构建一致  不支持指定目录下载 否则无法正确挂载执行
       "cd  kata-containers/src/agent",
       "git checkout 051dabb0fef2a85e329cb5d7f61d34716d9549b2",
-      "cargo fetch",
-      "dettrace --base-env host -- make"
+      "cargo fetch",   
+      "dettrace --base-env host -- make"                    //若为非c++ 项目  1. 必须添加参数 --base-env host  
+                                                            //              2.项目编译过程隔绝网络环境  若需要联网下载cargo 依赖等 要提前使用 cargo fetch
    ],
    "config" : {
       "version_gf" : "0.1"
    },
    "dependency" : [
       {
-         "source_dep" : "curl",
+         "source_dep" : "curl",                             
          "version_dep" : "7.58.0-2ubuntu3.19"
       },
       {
@@ -53,7 +54,7 @@
       "source_link" : "",
       "source_type" : ""
    },
-   "timestamp" : "1234567890",
+   "timestamp" : "1234567890",       //后面我跟九钟商量一下 要不要给这个删掉
    "version" : "1.0"
 }
 

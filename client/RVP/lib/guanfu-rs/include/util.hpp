@@ -1,21 +1,31 @@
 #ifndef UTIL_H
 #define UTIL_H
 
+#include <limits.h>
+#include <linux/futex.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include <limits.h>
 #include <sys/uio.h>
-#include <iostream>
 
+#include <iostream>
 #include <unordered_map>
 
-#include <linux/futex.h>
-
 #include "traceePtr.hpp"
+//
+#include <fcntl.h>
+#include <limits.h>
+#include <linux/futex.h>
+#include <linux/stat.h>
+//
+#include <algorithm>
+#include <chrono>
+#include <ctime>
+#include <iomanip>
+#include <iostream>
+#include <unordered_map>
 
 using namespace std;
 
@@ -23,7 +33,8 @@ using namespace std;
  * Helper function for getting a value from a container
  */
 template <
-    template <class, class, class...> class Container,
+    template <class, class, class...>
+    class Container,
     typename K,
     typename V,
     typename... Args>

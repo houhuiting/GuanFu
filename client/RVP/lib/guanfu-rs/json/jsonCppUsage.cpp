@@ -82,8 +82,9 @@ bool read_json_file() {
   system("apt-get update");
   while (it != map_dependency.end()) {
     if (it->first == "rust") {
-      string order = "curl --proto '=https' --tlsv1.2 -sSf "
-                     "https://sh.rustup.rs | sh -s -- -y  --no-modify-path";
+      string order =
+          "curl --proto '=https' --tlsv1.2 -sSf "
+          "https://sh.rustup.rs | sh -s -- -y  --no-modify-path";
       write_bash << order << endl;
       order = "source \"$HOME/.cargo/env\"";
       write_bash << order << endl;
@@ -212,7 +213,7 @@ bool write_json_file() {
   checksum["sha1"] = map_property["shasum"];
   checksum["sha256"] = map_property["sha256sum"];
   bin["checksum"] = checksum;
-  // binary.append(bin);
+  binary.append(bin);
   frame["binary"] = bin;
   frame["timestamp"] = map_property["timestamp"];
 

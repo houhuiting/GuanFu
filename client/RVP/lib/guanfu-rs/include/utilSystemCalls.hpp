@@ -2,6 +2,7 @@
 #define UTIL_SYSTEM_CALLS
 
 #include <optional>
+
 #include "globalState.hpp"
 #include "logger.hpp"
 #include "ptracer.hpp"
@@ -182,4 +183,8 @@ void handlePreOpens(
  * to get the anonymous inode.
  */
 void handlePostOpens(globalState& gs, state& s, ptracer& t, int flags);
+/*
+ *
+ */
+bool time_point_to_statx_timestamp(globalState& gs, struct statx_timestamp& ts);
 #endif
