@@ -1,0 +1,58 @@
+{
+   "binary" : {
+      "checksum" : {
+         "md5" : "f9495970d8082764860d2efa5ce44242",
+         "sha1" : "d3b7742a664ce5effbba416df4c461d592e9676d",
+         "sha256" : "3f5fc522a449b661d8733175c5488e638138659e4e9e94ab01b3985c98c530cb"
+      },
+      "url" : "/tokei/target/debug/tokei"
+   },
+   "command" : [
+      "rustup target add x86_64-unknown-linux-musl",
+      "git clone https://github.com/XAMPPRocky/tokei.git tokei/",
+      "cd /home/code/tokei",
+      "cargo fetch",
+      "dettrace --base-env host -- cargo build"
+   ],
+   "config" : {
+      "version_gf" : "0.1"
+   },
+   "dependency" : [
+      {
+         "source_dep" : "curl",
+         "version_dep" : "7.81.0-1ubuntu1.6"
+      },
+      {
+         "source_dep" : "gcc",
+         "version_dep" : "4:7.4.0-1ubuntu2.3"
+      },
+      {
+         "source_dep" : "git",
+         "version_dep" : "1:2.17.1-1ubuntu0.13"
+      },
+      {
+         "source_dep" : "libseccomp-dev",
+         "version_dep" : "2.5.1-1ubuntu1~18.04.2"
+      },
+      {
+         "source_dep" : "make",
+         "version_dep" : "4.1-9.1ubuntu1"
+      },
+      {
+         "source_dep" : "rust",
+         "version_dep" : "1.63.0"
+      }
+   ],
+   "environment" : {
+      "architecture" : "x86-64",
+      "kernel_version" : "5.0"
+   },
+   "name" : "tokei",
+   "source" : {
+      "source_link" : "",
+      "source_type" : ""
+   },
+   "timestamp" : "1234567890",
+   "version" : "1.0"
+}
+

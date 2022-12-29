@@ -1,0 +1,58 @@
+{
+   "binary" : {
+      "checksum" : {
+         "md5" : "b0035d1cc98eb9aa921dc14966857a9e",
+         "sha1" : "6811f244085d866816b04e6f348f758a4d6efca8",
+         "sha256" : "82ef0cd286771a7cf06a97f8f4452fd56f8a8555ce7f29027f8b4782db7cc81c"
+      },
+      "url" : "/libcrossterm/target/debug/libcrossterm.rlib"
+   },
+   "command" : [
+      "rustup target add x86_64-unknown-linux-musl",
+      "git clone https://github.com/crossterm-rs/crossterm.git libcrossterm/",
+      "cd /home/code/libcrossterm",
+      "cargo fetch",
+      "dettrace --base-env host -- cargo build"
+   ],
+   "config" : {
+      "version_gf" : "0.1"
+   },
+   "dependency" : [
+      {
+         "source_dep" : "curl",
+         "version_dep" : "7.81.0-1ubuntu1.6"
+      },
+      {
+         "source_dep" : "gcc",
+         "version_dep" : "4:7.4.0-1ubuntu2.3"
+      },
+      {
+         "source_dep" : "git",
+         "version_dep" : "1:2.17.1-1ubuntu0.13"
+      },
+      {
+         "source_dep" : "libseccomp-dev",
+         "version_dep" : "2.5.1-1ubuntu1~18.04.2"
+      },
+      {
+         "source_dep" : "make",
+         "version_dep" : "4.1-9.1ubuntu1"
+      },
+      {
+         "source_dep" : "rust",
+         "version_dep" : "1.63.0"
+      }
+   ],
+   "environment" : {
+      "architecture" : "x86-64",
+      "kernel_version" : "5.0"
+   },
+   "name" : "libcrossterm",
+   "source" : {
+      "source_link" : "",
+      "source_type" : ""
+   },
+   "timestamp" : "1234567890",
+   "version" : "1.0"
+}
+

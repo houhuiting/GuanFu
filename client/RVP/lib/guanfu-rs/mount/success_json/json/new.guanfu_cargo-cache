@@ -1,0 +1,58 @@
+{
+   "binary" : {
+      "checksum" : {
+         "md5" : "70978ac9a8cf6a052823c189d842ab09",
+         "sha1" : "64667b07259ec2dc7e37f10c440d53896f943b92",
+         "sha256" : "efe7f4eed8b61729aef61033efad57e50cf4cd071fdbc8bbce1920a27f491e4a"
+      },
+      "url" : "/cargo-cache/target/debug/cargo-cache"
+   },
+   "command" : [
+      "rustup target add x86_64-unknown-linux-musl",
+      "git clone https://github.com/matthiaskrgr/cargo-cache.git cargo-cache/",
+      "cd /home/code/cargo-cache",
+      "cargo fetch",
+      "dettrace --base-env host -- cargo build"
+   ],
+   "config" : {
+      "version_gf" : "0.1"
+   },
+   "dependency" : [
+      {
+         "source_dep" : "curl",
+         "version_dep" : "7.81.0-1ubuntu1.6"
+      },
+      {
+         "source_dep" : "gcc",
+         "version_dep" : "4:7.4.0-1ubuntu2.3"
+      },
+      {
+         "source_dep" : "git",
+         "version_dep" : "1:2.17.1-1ubuntu0.13"
+      },
+      {
+         "source_dep" : "libseccomp-dev",
+         "version_dep" : "2.5.1-1ubuntu1~18.04.2"
+      },
+      {
+         "source_dep" : "make",
+         "version_dep" : "4.1-9.1ubuntu1"
+      },
+      {
+         "source_dep" : "rust",
+         "version_dep" : "1.63.0"
+      }
+   ],
+   "environment" : {
+      "architecture" : "x86-64",
+      "kernel_version" : "5.0"
+   },
+   "name" : "cargo-cache",
+   "source" : {
+      "source_link" : "",
+      "source_type" : ""
+   },
+   "timestamp" : "1234567890",
+   "version" : "1.0"
+}
+

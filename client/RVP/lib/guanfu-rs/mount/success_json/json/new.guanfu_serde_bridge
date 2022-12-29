@@ -1,0 +1,58 @@
+{
+   "binary" : {
+      "checksum" : {
+         "md5" : "8d452e3c16ef0f8f0eeb0236d368a82f",
+         "sha1" : "b566a5311988d039cf6d3774a63e8293c8b4fbd7",
+         "sha256" : "e5c4805f19e4381aaba15c32741875017c65e55fc39ea87b35d4f789219e11e1"
+      },
+      "url" : "/serde_bridge/target/debug/libserde_bridge.rlib"
+   },
+   "command" : [
+      "rustup target add x86_64-unknown-linux-musl",
+      "git clone https://github.com/Xuanwo/serde-bridge.git serde_bridge/",
+      "cd /home/code/serde_bridge",
+      "cargo fetch",
+      "dettrace --base-env host -- cargo build"
+   ],
+   "config" : {
+      "version_gf" : "0.1"
+   },
+   "dependency" : [
+      {
+         "source_dep" : "curl",
+         "version_dep" : "7.81.0-1ubuntu1.6"
+      },
+      {
+         "source_dep" : "gcc",
+         "version_dep" : "4:7.4.0-1ubuntu2.3"
+      },
+      {
+         "source_dep" : "git",
+         "version_dep" : "1:2.17.1-1ubuntu0.13"
+      },
+      {
+         "source_dep" : "libseccomp-dev",
+         "version_dep" : "2.5.1-1ubuntu1~18.04.2"
+      },
+      {
+         "source_dep" : "make",
+         "version_dep" : "4.1-9.1ubuntu1"
+      },
+      {
+         "source_dep" : "rust",
+         "version_dep" : "1.63.0"
+      }
+   ],
+   "environment" : {
+      "architecture" : "x86-64",
+      "kernel_version" : "5.0"
+   },
+   "name" : "serde_bridge",
+   "source" : {
+      "source_link" : "",
+      "source_type" : ""
+   },
+   "timestamp" : "1234567890",
+   "version" : "1.0"
+}
+

@@ -1,0 +1,58 @@
+{
+   "binary" : {
+      "checksum" : {
+         "md5" : "af014806a88c8a9a8660ecf445991ebf",
+         "sha1" : "4758c40f65bb18096a6ba47e474982cae86ca602",
+         "sha256" : "e572ff6d411c5598fb398b492f0da83c6ead96e197182dc84cbf4686f579e867"
+      },
+      "url" : "/anyascii/impl/rust/target/debug/anyascii"
+   },
+   "command" : [
+      "rustup target add x86_64-unknown-linux-musl",
+      "git clone https://github.com/anyascii/anyascii.git anyascii/",
+      "cd /home/code/anyascii/impl/rust",
+      "cargo fetch",
+      "dettrace --base-env host -- cargo build"
+   ],
+   "config" : {
+      "version_gf" : "0.1"
+   },
+   "dependency" : [
+      {
+         "source_dep" : "curl",
+         "version_dep" : "7.81.0-1ubuntu1.6"
+      },
+      {
+         "source_dep" : "gcc",
+         "version_dep" : "4:7.4.0-1ubuntu2.3"
+      },
+      {
+         "source_dep" : "git",
+         "version_dep" : "1:2.17.1-1ubuntu0.13"
+      },
+      {
+         "source_dep" : "libseccomp-dev",
+         "version_dep" : "2.5.1-1ubuntu1~18.04.2"
+      },
+      {
+         "source_dep" : "make",
+         "version_dep" : "4.1-9.1ubuntu1"
+      },
+      {
+         "source_dep" : "rust",
+         "version_dep" : "1.63.0"
+      }
+   ],
+   "environment" : {
+      "architecture" : "x86-64",
+      "kernel_version" : "5.0"
+   },
+   "name" : "anyascii",
+   "source" : {
+      "source_link" : "",
+      "source_type" : ""
+   },
+   "timestamp" : "1234567890",
+   "version" : "1.0"
+}
+

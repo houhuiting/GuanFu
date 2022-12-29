@@ -1,0 +1,66 @@
+{
+   "binary" : {
+      "checksum" : {
+         "md5" : "f1235184f756ec0962f1a3dd2fb73593",
+         "sha1" : "5a2ee26109ce292f4a726de4cf869af506621956",
+         "sha256" : "c367cb9074a6c65e538023ed932f88d10fb2b0f1ba72b0b7035f2ac3f7f66e5e"
+      },
+      "url" : "/ic_cdk/target/debug/libic_cdk.rlib"
+   },
+   "command" : [
+      "rustup target add x86_64-unknown-linux-musl",
+      "git clone https://github.com/dfinity/cdk-rs.git ic_cdk/",
+      "cd /home/code/ic_cdk",
+      "cargo fetch",
+      "dettrace --base-env host -- cargo build"
+   ],
+   "config" : {
+      "version_gf" : "0.1"
+   },
+   "dependency" : [
+      {
+         "source_dep" : "curl",
+         "version_dep" : "7.58.0-2ubuntu3.20"
+      },
+      {
+         "source_dep" : "gcc",
+         "version_dep" : "4:7.4.0-1ubuntu2.3"
+      },
+      {
+         "source_dep" : "git",
+         "version_dep" : "1:2.17.1-1ubuntu0.13"
+      },
+      {
+         "source_dep" : "libseccomp-dev",
+         "version_dep" : "2.5.1-1ubuntu1~18.04.2"
+      },
+      {
+         "source_dep" : "libssl-dev",
+         "version_dep" : "1.1.1-1ubuntu2.1~18.04.20"
+      },
+      {
+         "source_dep" : "make",
+         "version_dep" : "4.1-9.1ubuntu1"
+      },
+      {
+         "source_dep" : "pkg-config",
+         "version_dep" : "0.29.1-0ubuntu2"
+      },
+      {
+         "source_dep" : "rust",
+         "version_dep" : "1.66.0"
+      }
+   ],
+   "environment" : {
+      "architecture" : "x86-64",
+      "kernel_version" : "5.0"
+   },
+   "name" : "ic_cdk",
+   "source" : {
+      "source_link" : "",
+      "source_type" : ""
+   },
+   "timestamp" : "1234567890",
+   "version" : "1.0"
+}
+

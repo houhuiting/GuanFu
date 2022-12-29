@@ -1,0 +1,59 @@
+成功：
+syn https://github.com/dtolnay/syn.git
+rand https://github.com/rust-random/rand.git
+libc https://github.com/rust-lang/libc.git
+quote https://github.com/dtolnay/quote.git
+cfg_if https://github.com/rust-lang/cfg-if.git
+proc_macro2 https://github.com/dtolnay/proc-macro2.git
+serde https://github.com/serde-rs/serde.git
+unicode_xid https://github.com/unicode-rs/unicode-xid.git
+autocfg https://github.com/cuviper/autocfg.git
+crossterm https://github.com/crossterm-rs/crossterm.git
+inferno https://github.com/jonhoo/inferno.git
+cargo_llvm_cov https://github.com/taiki-e/cargo-llvm-cov.git
+run_script https://github.com/sagiegurari/run_script.git
+honggfuzz https://github.com/rust-fuzz/honggfuzz-rs.git
+globiter https://github.com/Xuanwo/globiter.git
+serde_env https://github.com/Xuanwo/serde-env.git
+serde_bridge https://github.com/Xuanwo/serde-bridge.git
+serfig https://github.com/Xuanwo/serfig.git
+shell2batch https://github.com/sagiegurari/shell2batch.git
+fork https://github.com/immortal/fork.git
+parse_hyperlinks https://gitlab.com/getreu/parse-hyperlinks.git
+ariadne https://github.com/zesterer/ariadne.git
+gptman https://github.com/rust-disk-partition-management/gptman.git
+question https://gitlab.com/starshell/question.git
+lockfile https://github.com/derekdreery/lockfile-rs.git
+ferris_says https://github.com/rust-lang/ferris-says.git
+self_update https://github.com/jaemk/self_update.git
+cargo_binutils https://github.com/rust-embedded/cargo-binutils.git
+cmd_lib https://github.com/rust-shell-script/rust_cmd_lib.git
+box_drawing https://gitlab.com/chronos.alfa/box_drawing.git
+
+--------------------------------------------------
+失败：
+wasm_smith https://github.com/bytecodealliance/wasm-tools.git
+
+----------------------------------------------------
+代码不可用：
+paw-attributes https://github.com/clap-rs/paw.git
+paw-raw https://github.com/clap-rs/paw.git
+paw https://github.com/clap-rs/paw.git
+deploy https://github.com/constellation-rs/constellation.git
+sqlx-cli https://github.com/launchbadge/sqlx.git
+
+-------------------------------------------------
+测试中：
+fast_socks5 https://github.com/dizda/fast-socks5.git
+rsass https://github.com/kaj/rsass.git
+ic_cdk https://github.com/dfinity/cdk-rs.git
+color_name https://github.com/annymosse/color-name.git
+loggerv https://github.com/clux/loggerv.git
+powershell_script https://github.com/cfsamson/powershell-script.git
+wl_clipboard_rs https://github.com/YaLTeR/wl-clipboard-rs.git
+paris https://github.com/0x20F/paris.git
+pelite https://github.com/CasualX/pelite.git
+streampager https://github.com/markbt/streampager.git
+
+-------------------------------------------------
+未测试：

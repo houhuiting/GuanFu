@@ -1,0 +1,68 @@
+{
+   "binary" : {
+      "checksum" : {
+         "md5" : "48ce005b5eaf30b64b25ab2ce2081dc0",
+         "sha1" : "5402272877a83acf3913234149d0d2cf76c6dffa",
+         "sha256" : "c26deffe1b9da597609f01ac43db020a4d09cf2c462d3e58d3b67bbdc58a8235"
+      },
+      "url" : "/libself_update/target/debug/libself_update.rlib"
+   },
+   "command" : [
+      "rustup target add x86_64-unknown-linux-musl",
+      "apt install pkg-config",
+      "apt install libssl-dev",
+      "git clone https://github.com/jaemk/self_update.git libself_update/",
+      "cd /home/code/libself_update",
+      "cargo fetch",
+      "dettrace --base-env host -- cargo build"
+   ],
+   "config" : {
+      "version_gf" : "0.1"
+   },
+   "dependency" : [
+      {
+         "source_dep" : "curl",
+         "version_dep" : "7.58.0-2ubuntu3.20"
+      },
+      {
+         "source_dep" : "gcc",
+         "version_dep" : "4:7.4.0-1ubuntu2.3"
+      },
+      {
+         "source_dep" : "git",
+         "version_dep" : "1:2.17.1-1ubuntu0.13"
+      },
+      {
+         "source_dep" : "libseccomp-dev",
+         "version_dep" : "2.5.1-1ubuntu1~18.04.2"
+      },
+      {
+         "source_dep" : "libssl-dev",
+         "version_dep" : "1.1.1-1ubuntu2.1~18.04.20"
+      },
+      {
+         "source_dep" : "make",
+         "version_dep" : "4.1-9.1ubuntu1"
+      },
+      {
+         "source_dep" : "pkg-config",
+         "version_dep" : "0.29.1-0ubuntu2"
+      },
+      {
+         "source_dep" : "rust",
+         "version_dep" : "1.66.0"
+      }
+   ],
+   "environment" : {
+      "architecture" : "x86-64",
+      "kernel_version" : "5.0"
+   },
+   "name" : "libself_update",
+   "source" : {
+      "source_link" : "",
+      "source_type" : ""
+   },
+   "timestamp" : "1234567890",
+   "version" : "1.0"
+}
+

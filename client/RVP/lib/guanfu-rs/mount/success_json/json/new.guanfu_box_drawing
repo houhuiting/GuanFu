@@ -1,0 +1,66 @@
+{
+   "binary" : {
+      "checksum" : {
+         "md5" : "5d2ff40f012ad81a098c234f757bffc4",
+         "sha1" : "27f8e8c496dcf8dc0df24390345403740b0ce606",
+         "sha256" : "50741131a08e559dc56c5736b5dc0af6c7dced5da10e2dd4bff982e75fc7cc95"
+      },
+      "url" : "/box_drawing/target/debug/libbox_drawing.rlib"
+   },
+   "command" : [
+      "rustup target add x86_64-unknown-linux-musl",
+      "git clone https://gitlab.com/chronos.alfa/box_drawing.git box_drawing/",
+      "cd /home/code/box_drawing",
+      "cargo fetch",
+      "dettrace --base-env host -- cargo build"
+   ],
+   "config" : {
+      "version_gf" : "0.1"
+   },
+   "dependency" : [
+      {
+         "source_dep" : "curl",
+         "version_dep" : "7.58.0-2ubuntu3.20"
+      },
+      {
+         "source_dep" : "gcc",
+         "version_dep" : "4:7.4.0-1ubuntu2.3"
+      },
+      {
+         "source_dep" : "git",
+         "version_dep" : "1:2.17.1-1ubuntu0.13"
+      },
+      {
+         "source_dep" : "libseccomp-dev",
+         "version_dep" : "2.5.1-1ubuntu1~18.04.2"
+      },
+      {
+         "source_dep" : "libssl-dev",
+         "version_dep" : "1.1.1-1ubuntu2.1~18.04.20"
+      },
+      {
+         "source_dep" : "make",
+         "version_dep" : "4.1-9.1ubuntu1"
+      },
+      {
+         "source_dep" : "pkg-config",
+         "version_dep" : "0.29.1-0ubuntu2"
+      },
+      {
+         "source_dep" : "rust",
+         "version_dep" : "1.66.0"
+      }
+   ],
+   "environment" : {
+      "architecture" : "x86-64",
+      "kernel_version" : "5.0"
+   },
+   "name" : "box_drawing",
+   "source" : {
+      "source_link" : "",
+      "source_type" : ""
+   },
+   "timestamp" : "1234567890",
+   "version" : "1.0"
+}
+

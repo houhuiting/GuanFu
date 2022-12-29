@@ -1,0 +1,39 @@
+成功：
+bindgen https://github.com/rust-lang/rust-bindgen.git
+names https://github.com/fnichol/names.git
+grcov https://github.com/mozilla/grcov.git
+cargo-deb https://github.com/kornelski/cargo-deb.git
+cargo-make https://github.com/sagiegurari/cargo-make.git
+cargo-ndk https://github.com/bbqsrc/cargo-ndk.git
+duck https://github.com/sagiegurari/duckscript.git
+cargo-chef https://github.com/LukeMathWalker/cargo-chef.git
+comrak https://github.com/kivikakk/comrak.git
+bat https://github.com/sharkdp/bat.git
+cargo-cache https://github.com/matthiaskrgr/cargo-cache.git
+cargo-watch https://github.com/watchexec/cargo-watch.git
+fd https://github.com/sharkdp/fd.git
+ripgrep https://github.com/BurntSushi/ripgrep.git
+xwin https://github.com/Jake-Shadle/xwin.git
+anyascii https://github.com/anyascii/anyascii.git
+cargo-hack https://github.com/taiki-e/cargo-hack.git
+tokei https://github.com/XAMPPRocky/tokei.git
+just https://github.com/casey/just.git
+grass https://github.com/connorskees/grass.git
+sarif-fmt https://github.com/psastras/sarif-rs.git
+cargo-ctest https://github.com/lu-zero/cargo-c.git
+sccache https://github.com/mozilla/sccache.git
+
+-------------------------------------------------------
+失败：
+cargo-semver-checks https://github.com/obi1kenobi/cargo-semver-checks.git
+-------------------------------------------------------
+测试中：
+clippy-sarif https://github.com/psastras/sarif-rs.git
+trunk https://github.com/thedodd/trunk.git
+xargo https://github.com/japaric/xargo.git
+taplo https://github.com/tamasfe/taplo.git
+tree-sitter https://github.com/tree-sitter/tree-sitter.git
+
+-------------------------------------------------------
+未测试：
+cargo-espmonitor https://github.com/esp-rs/espmonitor.git

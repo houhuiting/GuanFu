@@ -1,0 +1,66 @@
+{
+   "binary" : {
+      "checksum" : {
+         "md5" : "9946a91edb2df9e83c00dae362a47a40",
+         "sha1" : "f02d36ef7506bc3c29d191828bd37e26fcd4aa94",
+         "sha256" : "27b067bfd4288eba8f2ec13655970ebb10677cb58cabb93b561bba5a705ccb87"
+      },
+      "url" : "/libcargo_binutils/target/debug/libcargo_binutils.rlib"
+   },
+   "command" : [
+      "rustup target add x86_64-unknown-linux-musl",
+      "git clone https://github.com/rust-embedded/cargo-binutils.git libcargo_binutils/",
+      "cd /home/code/libcargo_binutils",
+      "cargo fetch",
+      "dettrace --base-env host -- cargo build"
+   ],
+   "config" : {
+      "version_gf" : "0.1"
+   },
+   "dependency" : [
+      {
+         "source_dep" : "curl",
+         "version_dep" : "7.58.0-2ubuntu3.20"
+      },
+      {
+         "source_dep" : "gcc",
+         "version_dep" : "4:7.4.0-1ubuntu2.3"
+      },
+      {
+         "source_dep" : "git",
+         "version_dep" : "1:2.17.1-1ubuntu0.13"
+      },
+      {
+         "source_dep" : "libseccomp-dev",
+         "version_dep" : "2.5.1-1ubuntu1~18.04.2"
+      },
+      {
+         "source_dep" : "libssl-dev",
+         "version_dep" : "1.1.1-1ubuntu2.1~18.04.20"
+      },
+      {
+         "source_dep" : "make",
+         "version_dep" : "4.1-9.1ubuntu1"
+      },
+      {
+         "source_dep" : "pkg-config",
+         "version_dep" : "0.29.1-0ubuntu2"
+      },
+      {
+         "source_dep" : "rust",
+         "version_dep" : "1.66.0"
+      }
+   ],
+   "environment" : {
+      "architecture" : "x86-64",
+      "kernel_version" : "5.0"
+   },
+   "name" : "libcargo_binutils",
+   "source" : {
+      "source_link" : "",
+      "source_type" : ""
+   },
+   "timestamp" : "1234567890",
+   "version" : "1.0"
+}
+
